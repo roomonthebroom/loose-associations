@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 import {
   AlertDialog,
@@ -10,15 +10,15 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../../ui/alert-dialog";
+} from '../../ui/alert-dialog';
 
 function BaseModal({
-  title = "title",
+  title = 'title',
   trigger = undefined,
   initiallyOpen = true,
   footerElements,
   children,
-  actionButtonText = "Continue",
+  actionButtonText = 'Continue',
   showActionButton = true,
 }) {
   const [isOpen, setIsOpen] = React.useState(initiallyOpen);
@@ -33,7 +33,7 @@ function BaseModal({
 
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
-      {!!trigger && <AlertDialogTrigger>{trigger}</AlertDialogTrigger>}
+      {!!trigger && <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>}
       <AlertDialogContent
         handleMouseDownOnOverlay={handleCloseEvent}
         onEscapeKeyDown={handleCloseEvent}

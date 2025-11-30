@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import WordButton from "../WordButton";
+import WordButton from '../WordButton';
 
-import * as styles from "./GameGrid.module.css";
+import * as styles from './GameGrid.module.css';
 
-import { useSpring, animated } from "react-spring";
-import { PuzzleDataContext } from "../../providers/PuzzleDataProvider";
-import { GameStatusContext } from "../../providers/GameStatusProvider";
+import { useSpring, animated } from 'react-spring';
+import { PuzzleDataContext } from '../../providers/PuzzleDataProvider';
+import { GameStatusContext } from '../../providers/GameStatusProvider';
 
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { Badge } from "../ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import { Badge } from '../ui/badge';
 
 function WordRow({ words }) {
   return (
@@ -23,10 +23,10 @@ function WordRow({ words }) {
 
 export function SolvedWordRow({ ...props }) {
   const DIFFICULTY_COLOR_MAP = {
-    1: "rgb(74 222 128)", // green
-    2: "rgb(251 191 36)", // amber
-    3: "rgb(129 140 248)", //indigo
-    4: "rgb(34 211 238)", //cyan
+    1: 'rgb(74 222 128)', // green
+    2: 'rgb(251 191 36)', // amber
+    3: 'rgb(129 140 248)', //indigo
+    4: 'rgb(34 211 238)', //cyan
   };
 
   const color = `${DIFFICULTY_COLOR_MAP[props.difficulty]}`;
@@ -36,11 +36,11 @@ export function SolvedWordRow({ ...props }) {
   const springProps = useSpring({
     from: {
       opacity: 0,
-      transform: "translateY(100%)",
+      transform: 'translateY(100%)',
     },
     to: {
       opacity: 1,
-      transform: "translateY(0%)",
+      transform: 'translateY(0%)',
     },
     delay: 250,
   });
@@ -113,7 +113,7 @@ function GameGrid({ gameRows, shouldGridShake, setShouldGridShake }) {
         </div>
       )}
       {isGameActive && (
-        <div className={`grid gap-y-2 ${shouldGridShake ? styles.shake : ""}`}>
+        <div className={`grid gap-y-2 ${shouldGridShake ? styles.shake : ''}`}>
           {gameRows.map((row, idx) => (
             <WordRow key={idx} words={row} />
           ))}
