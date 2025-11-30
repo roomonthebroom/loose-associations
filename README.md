@@ -1,6 +1,6 @@
 # Loose Associations
 
-Deployed at: TBD
+Deployed at: [dekcuf.net/loose-connections](http://dekcuf.net/loose-connections/)
 
 A forked clone of [and-computers/react-connections-game](https://github.com/and-computers/react-connections-game), meant to be a silly riff on Connections. Where every clue ends up being a loose connection that can apply to any word.
 
