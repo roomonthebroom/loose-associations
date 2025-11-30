@@ -1,17 +1,14 @@
-# Connections (React, Tailwind, Shadcn/ui)
+# Loose Associations
 
-This is a clone of the [NYT Connections Game](https://www.nytimes.com/games/connections). Which itself seems to be an unacknowledged clone of the British game [`Only Connect`](https://kotaku.com/new-york-times-connections-only-connect-puzzle-wordle-1850553072).
+Deployed at: TBD
 
-Anyways..
+A forked clone of [and-computers/react-connections-game](https://github.com/and-computers/react-connections-game), meant to be a silly riff on Connections. Where every clue ends up being a loose connection that can apply to any word.
 
-### [Click Here To Try Out The Demo](https://blackconnections.andcomputers.io/)
+The remainder of the readme is largely a copy of the original project's with minor tweaks.
 
-![Gif of Connections Gameplay](/docs/instructions-gif-connections.gif)
+## Run Locally
 
-## To Run Locally:
-
-```
-cd react-connections-game
+```sh
 npm install
 npm run dev
 ```
@@ -36,26 +33,7 @@ npm run dev
 - Custom hooks are in `src/hooks`
   - Both of these are code snippets taken from [Josh Comeau's Blog](https://www.joshwcomeau.com/snippets/)
 
-#### Similar Projects
-
-- [PuzzGrid](https://puzzgrid.com/about) which allows you to create your own games/puzzles, no code required.
-- [Connections Generator by swellgarfo](https://www.reddit.com/r/NYTSpellingBee/comments/152i5cx/for_those_playing_nyt_connections_i_created_a/) which also allows you to create your own games/puzzles, no code required.
-
-### Contributing
-
-- Please fork and submit a PR if you'd like!
-
-### Projects Built Using This Repo:
-
-- _your fork here!_
-
-_Want to add one to the list? Please make a pull request._
-
-#### If you found this helpful or entertaining feel free to check out our other work!
+#### Check out the OG project's other work
 
 - [Writings & Thoughts](https://andcomputers.io)
 - [Black Wordle](https://blackwords.andcomputers.io)
-
-##### If you'd like to support financially
-
-- [One-Time Contribution via Stripe](https://buy.stripe.com/7sIg1Udac6xZegodQR)
