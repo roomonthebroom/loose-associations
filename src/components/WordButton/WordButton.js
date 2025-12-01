@@ -1,8 +1,8 @@
-import React from "react";
-import * as styles from "./WordButton.module.css";
-import { Toggle } from "../ui/toggle";
+import React from 'react';
+import * as styles from './WordButton.module.css';
+import { Toggle } from '../ui/toggle';
 
-import { GameStatusContext } from "../../providers/GameStatusProvider";
+import { GameStatusContext } from '../../providers/GameStatusProvider';
 
 function WordButton({ word, fullCandidateSize }) {
   const { guessCandidate, setGuessCandidate } =
@@ -46,13 +46,13 @@ function WordButton({ word, fullCandidateSize }) {
     if (wordLength > baseLength) {
       const numExtraChars = wordLength - baseLength;
       fontSize = fontSize - numExtraChars * 0.1;
-      fontSize = Math.max(0.5, fontSize);
+      fontSize = Math.max(0.75, fontSize);
       return `${fontSize}em`;
     } else {
       return null;
     }
   }
-  // word = "washingtonian";
+
   return (
     <Toggle
       className={`${styles.growShrink} select-none`}
@@ -61,8 +61,8 @@ function WordButton({ word, fullCandidateSize }) {
       onClick={flipSelection}
     >
       <p
-        style={{ fontSize: getFontSize(word) }}
-        className="font-space-mono uppercase sm:text-xs md:text-xs"
+        style={{ fontSize: getFontSize(word), lineHeight: '0.6rem' }}
+        className="font-space-mono uppercase sm:text-sm md:text-base"
       >
         {word}
       </p>
