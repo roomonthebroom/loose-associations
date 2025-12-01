@@ -6,11 +6,11 @@ import {
   startOfDay,
   startOfToday,
   startOfYesterday,
-} from "date-fns";
+} from 'date-fns';
 
-import queryString from "query-string";
+import queryString from 'query-string';
 
-import { CONNECTION_GAMES } from "./data";
+import { CONNECTION_GAMES } from './data';
 
 export const getToday = () => startOfToday();
 export const getYesterday = () => startOfYesterday();
@@ -41,7 +41,6 @@ export const isValidGameDate = (date) => {
 export const getIndex = (gameDate) => {
   let start = firstGameDate;
   let index = -1;
-  console.log(firstGameDate);
   do {
     index++;
     start = addDays(start, periodInDays);
@@ -52,7 +51,7 @@ export const getIndex = (gameDate) => {
 
 export const getPuzzleOfDay = (index) => {
   if (index < 0) {
-    throw new Error("Invalid index");
+    throw new Error('Invalid index');
   }
 
   return CONNECTION_GAMES[index % CONNECTION_GAMES.length];
@@ -62,7 +61,7 @@ export const getSolution = (gameDate) => {
   const nextGameDate = getNextGameDate(gameDate);
   const index = getIndex(gameDate);
   const puzzleOfTheDay = getPuzzleOfDay(index);
-  console.log("index for today: ", index);
+  console.log('index for today: ', index);
   return {
     puzzleAnswers: puzzleOfTheDay,
     puzzleGameDate: gameDate,
@@ -92,19 +91,19 @@ export const getGameDate = () => {
 export const setGameDate = (d) => {
   try {
     if (d < getToday()) {
-      window.location.href = "/?d=" + formatISO(d, { representation: "date" });
+      window.location.href = '/?d=' + formatISO(d, { representation: 'date' });
       return;
     }
   } catch (e) {
     console.log(e);
   }
-  window.location.href = "/";
+  window.location.href = '/';
 };
 
 export const getIsLatestGame = () => {
   // https://github.com/cwackerfuss/react-wordle/pull/505
   const parsed = queryString.parse(window.location.search);
-  return parsed === null || !("d" in parsed);
+  return parsed === null || !('d' in parsed);
 };
 
 export const { puzzleAnswers, puzzleGameDate, puzzleIndex, dateOfNextPuzzle } =
