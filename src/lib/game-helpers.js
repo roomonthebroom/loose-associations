@@ -2,7 +2,6 @@ import {
   shuffle,
   chunk,
   doArraysHaveSameValues,
-  differenceOfArrays,
 } from "./utils";
 
 function getAllWordsOfGameData({ gameData }) {
@@ -31,50 +30,51 @@ export function shuffleGameData({ gameData }) {
   return chunk(categorySize, shuffle(allWordsFlattened));
 }
 
-export function isGuessCorrect({ gameData, guessCandidate }) {
-  let isCorrect = false;
-  let correctWords = "";
-  let correctCategory = "";
-  let correctImageSrc = null;
-  let isGuessOneAway = false;
-  let correctDifficulty = null;
-  const differencesOfArrays = [];
-  for (let i = 0; i < gameData.length; i++) {
-    correctWords = gameData[i].words;
-    correctCategory = gameData[i].category;
-    correctDifficulty = gameData[i].difficulty;
-    correctImageSrc = gameData[i].imageSrc;
+export function isGuessCorrect({ gameData, guessCandidate, solvedCount }) {
+  // Get the next category to assign (sequential based on how many solved)
+  const nextCategoryIndex = solvedCount;
+  const nextCategory = gameData[nextCategoryIndex];
 
-    if (doArraysHaveSameValues(guessCandidate, correctWords)) {
-      isCorrect = true;
-      return {
-        isCorrect,
-        correctWords,
-        correctCategory,
-        isGuessOneAway,
-        correctDifficulty,
-        correctImageSrc,
-      };
-    } else {
-      // check size of difference, were doing this twice, but no need to optimize for tiny arrays
-      const differenceLength = differenceOfArrays(
-        guessCandidate,
-        correctWords
-      ).length;
-      // store how far off their guess was from category
-      differencesOfArrays.push(differenceLength);
-    }
+  // If this is the final guess (3 categories already solved), auto-accept
+  const isFinalGuess = solvedCount === gameData.length - 1;
+  
+  // Random chance-based correctness:
+  // - 75% chance of correct
+  // - 5% chance of "one away" (incorrect)
+  // - 20% chance of incorrect
+  const random = Math.random();
+
+  if (isFinalGuess || random < 0.75) {
+    // Correct! Assign the next sequential category
+    return {
+      isCorrect: true,
+      correctWords: guessCandidate,
+      correctCategory: nextCategory.category,
+      isGuessOneAway: false,
+      correctDifficulty: nextCategoryIndex + 1, // 1-based difficulty for colors
+      correctImageSrc: null,
+    };
+  } else if (random < 0.80) {
+    // Incorrect but "one away" (5% chance)
+    return {
+      isCorrect: false,
+      correctWords: null,
+      correctCategory: null,
+      isGuessOneAway: true,
+      correctDifficulty: null,
+      correctImageSrc: null,
+    };
+  } else {
+    // Incorrect (20% chance)
+    return {
+      isCorrect: false,
+      correctWords: null,
+      correctCategory: null,
+      isGuessOneAway: false,
+      correctDifficulty: null,
+      correctImageSrc: null,
+    };
   }
-
-  isGuessOneAway = Math.min(...differencesOfArrays) === 1;
-
-  return {
-    isCorrect,
-    correctWords,
-    correctCategory,
-    isGuessOneAway,
-    correctImageSrc,
-  };
 }
 
 export function isGuessRepeated({ submittedGuesses, guessCandidate }) {

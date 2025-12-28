@@ -16,7 +16,7 @@ function GameStatusProvider({ children }) {
   const [submittedGuesses, setSubmittedGuesses] = React.useState([]);
   const [solvedGameData, setSolvedGameData] = React.useState(() => {
     const loadedState = loadGameStateFromLocalStorage();
-    console.log("checking game state!", {
+    console.log("checking game state", {
       loadedState: loadedState,
       gd1: gameData,
       gd2: loadedState?.gameData,

@@ -10,7 +10,7 @@ import {
 
 import queryString from 'query-string';
 
-import { CONNECTION_GAMES } from './data';
+import { GAME_CATEGORIES, GAME_WORDS } from './data';
 
 export const getToday = () => startOfToday();
 export const getYesterday = () => startOfYesterday();
@@ -49,12 +49,34 @@ export const getIndex = (gameDate) => {
   return index;
 };
 
+// Helper to get items from array starting at index, wrapping around
+const getItemsWithWrap = (array, startIndex, count) => {
+  const items = [];
+  for (let i = 0; i < count; i++) {
+    items.push(array[(startIndex + i) % array.length]);
+  }
+  return items;
+};
+
 export const getPuzzleOfDay = (index) => {
   if (index < 0) {
     throw new Error('Invalid index');
   }
 
-  return CONNECTION_GAMES[index % CONNECTION_GAMES.length];
+  // Get 4 categories starting at index, wrapping around
+  const categories = getItemsWithWrap(GAME_CATEGORIES, index, 4);
+
+  // Get 16 words starting at index * 4, wrapping around
+  const words = getItemsWithWrap(GAME_WORDS, index * 4, 16);
+
+  // Structure as array of category objects for compatibility
+  // Words are arbitrarily grouped (4 per category) since correctness is random
+  return [
+    { category: categories[0], words: words.slice(0, 4), difficulty: 1 },
+    { category: categories[1], words: words.slice(4, 8), difficulty: 2 },
+    { category: categories[2], words: words.slice(8, 12), difficulty: 3 },
+    { category: categories[3], words: words.slice(12, 16), difficulty: 4 },
+  ];
 };
 
 export const getSolution = (gameDate) => {

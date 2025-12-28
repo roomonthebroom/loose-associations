@@ -49,7 +49,7 @@ function GameControlButtonsPanel({
     }
     // add guess to state
     setSubmittedGuesses([...submittedGuesses, guessCandidate]);
-    // check if the guess is correct
+    // check if the guess is correct (75% chance, with 5% "one away" on incorrect)
     const {
       isCorrect,
       correctWords,
@@ -60,6 +60,7 @@ function GameControlButtonsPanel({
     } = isGuessCorrect({
       guessCandidate,
       gameData,
+      solvedCount: solvedGameData.length,
     });
 
     // if the guess is correct:
